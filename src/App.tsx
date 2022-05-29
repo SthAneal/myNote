@@ -27,7 +27,7 @@ function App() {
   // }
 
   const getName = async ()=>{
-    const response = await axios.get('/http://143.198.234.42/api');
+    const response = await axios.get('/http://localhost:3000/api');
     console.log(response);
     setUser({name:response.data});
   }
