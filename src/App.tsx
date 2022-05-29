@@ -27,7 +27,7 @@ function App() {
   // }
 
   const getName = async ()=>{
-    const response = await axios.get('/api');
+    const response = await axios.get('/http://143.198.234.42/api');
     console.log(response);
     setUser({name:response.data});
   }
