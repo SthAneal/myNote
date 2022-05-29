@@ -14,9 +14,9 @@ export const Login = ()=>{
 
 
     const getName = async ()=>{
-        const response = await axios.get('/http://143.198.234.42/api/dashboard');
+        const response = await axios.get('http://143.198.234.42/api/dashboard');
         console.log(response);
-        setUser({name:response.data});
+        setUser({name:response.data.msg});
     }
 
     return(

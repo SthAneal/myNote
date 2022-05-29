@@ -13,9 +13,9 @@ export const Register = ()=>{
     }, [])
 
     const getName = async ()=>{
-        const response = await axios.get('/http://143.198.234.42/api/home');
+        const response = await axios.get('http://143.198.234.42/api/home');
         console.log(response);
-        setUser({name:response.data});
+        setUser({name:response.data.msgs});
       }
     return(
         <div>Register:{user.name}</div>
