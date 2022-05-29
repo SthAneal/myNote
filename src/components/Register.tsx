@@ -13,7 +13,7 @@ export const Register = ()=>{
     }, [])
 
     const getName = async ()=>{
-        const response = await axios.get('http://143.198.234.42/:3000/api/home');
+        const response = await axios.get('/http://143.198.234.42/:3000/api/home');
         console.log(response);
         setUser({name:response.data});
       }
