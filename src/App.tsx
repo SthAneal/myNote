@@ -22,7 +22,7 @@ function App() {
     // const response = await axios.get('/name');
     // console.log(response);
     // setUser({name:response.data});
-    setUser({name:'Anil'});
+    setUser({name:'Anil Shrestha'});
 
   }
 
