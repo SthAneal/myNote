@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import axios from 'axios';
+import axios from 'axios';
 import './App.css';
 import {Login} from './components/Login';
 import {Register} from './components/Register';
@@ -18,12 +18,18 @@ function App() {
     getName();
   }, [])
 
-  const getName = async ()=>{
-    // const response = await axios.get('/name');
-    // console.log(response);
-    // setUser({name:response.data});
-    setUser({name:'Anil Shrestha'});
+  // const getName = async ()=>{
+  //   // const response = await axios.get('/name');
+  //   // console.log(response);
+  //   // setUser({name:response.data});
+  //   setUser({name:'Anil Shrestha'});
 
+  // }
+
+  const getName = async ()=>{
+    const response = await axios.get('/api');
+    console.log(response);
+    setUser({name:response.data});
   }
 
   return (
