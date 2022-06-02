@@ -32,7 +32,7 @@ function App() {
   // }
 
   const getName = async ()=>{
-    const response = await Axios.get('/api/login');
+    const response = await Axios.get('/api/register');
     // const response = await Axios.get('/api/login');
 
     console.log(response);
