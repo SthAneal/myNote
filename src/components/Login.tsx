@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import Axios from '../api/Axios';
 
 type userInfo = {
     name:string
@@ -14,7 +14,9 @@ export const Login = ()=>{
 
 
     const getName = async ()=>{
-        const response = await axios.get('http://143.198.234.42/api/login');
+        const response = await Axios.get('/api/login');
+        // const response = await Axios.get('/api/login');
+
         console.log(response);
         setUser({name:response.data.msg});
     }
