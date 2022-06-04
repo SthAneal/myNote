@@ -49,9 +49,9 @@ function App() {
         <Routes>
           <Route path="/login" caseSensitive={false} element={<Login />} />
           <Route path="/register" caseSensitive={false} element={<Register />} />
+          <Route path="/woolie" caseSensitive={false} element={<Woolie />} />
+          <Route path="/coles" caseSensitive={false} element={<Coles />} />
           <Route path="/" caseSensitive={false} element={<Home />} />
-          <Route path="/" caseSensitive={false} element={<Woolie />} />
-          <Route path="/" caseSensitive={false} element={<Coles />} />
 
         </Routes>
       </Router>
