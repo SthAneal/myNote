@@ -16,7 +16,7 @@ export const Woolie = ()=>{
         // const response = await Axios.get('/api/login');
 
         console.log(response);
-        setProduct({product:response.data.Products[0].Products[0]});
+        setProduct({product:response.data.single});
     }
 
     return(

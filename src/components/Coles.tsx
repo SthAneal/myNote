@@ -16,7 +16,7 @@ export const Coles = ()=>{
         // const response = await Axios.get('/api/login');
 
         console.log(response);
-        setProduct({product:response.data.catalogEntryView[10]});
+        setProduct({product:response.data.single});
     }
 
     return(
