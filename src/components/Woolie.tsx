@@ -22,6 +22,8 @@ export const Woolie = ()=>{
     }
 
     return(
-        <div>Wollie: {JSON.stringify(product)}</div>
+        // <div>Wollie: {JSON.stringify(product)}</div>
+        <>Wollie: {product}</>
+
     )
 }

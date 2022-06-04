@@ -21,6 +21,7 @@ export const Coles = ()=>{
     }
 
     return(
-        <div>Coles: {JSON.stringify(product)}</div>
+        // <div>Coles: {JSON.stringify(product)}</div>
+        <>Coles: {product}</>
     )
 }
