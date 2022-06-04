@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Axios from '../api/Axios';
 
 type productType = {
-    product:string
+    product:{}
 }
 
 export const Coles = ()=>{
@@ -18,12 +18,12 @@ export const Coles = ()=>{
         // const response = await Axios.get('/api/login');
 
         console.log(response);
-        // setProduct({product:response.data.single});
-        setProduct({product:response.data.msg});
+        setProduct({product:response.data.single});
+        // setProduct({product:response.data.msg});
     }
 
     return(
-        // <div>Coles: {JSON.stringify(product)}</div>
-        <>Coles: {product.product}</>
+        <div>Coles: {JSON.stringify(product.product)}</div>
+        // <>Coles: {product.product}</>
     )
 }
