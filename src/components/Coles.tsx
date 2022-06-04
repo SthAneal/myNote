@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Axios from '../api/Axios';
 
-type productType = {}
+type productType = {
+    product:string
+}
 
 export const Coles = ()=>{
     const [product, setProduct] = useState<productType>({} as productType);
@@ -22,6 +24,6 @@ export const Coles = ()=>{
 
     return(
         // <div>Coles: {JSON.stringify(product)}</div>
-        <>Coles: {product}</>
+        <>Coles: {product.product}</>
     )
 }
