@@ -7,6 +7,8 @@ import './App.css';
 import {Login} from './components/Login';
 import {Register} from './components/Register';
 import {Home} from './components/Home';
+import { Woolie } from './components/Woolie';
+import {Coles} from './components/Coles';
 
 import Axios from './api/Axios';
 
@@ -48,6 +50,9 @@ function App() {
           <Route path="/login" caseSensitive={false} element={<Login />} />
           <Route path="/register" caseSensitive={false} element={<Register />} />
           <Route path="/" caseSensitive={false} element={<Home />} />
+          <Route path="/" caseSensitive={false} element={<Woolie />} />
+          <Route path="/" caseSensitive={false} element={<Coles />} />
+
         </Routes>
       </Router>
     </>
