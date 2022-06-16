@@ -1,7 +1,10 @@
 $soft-pink:#baabda80;
 $dark-pink:#D77FA1;
 $soft-blue:#D6E5FA;
-$soft-gray:#423737;
+$dark-gray:#423737;
+$soft-gray:#edecec;
+$soft-gray-hover:#d5d5d5;
+
 a{
     text-decoration: none;
 }
@@ -44,14 +47,14 @@ a{
         }
         
         & .nav-name{
-            color: $soft-gray;
+            color: $dark-gray;
             font-size: 1.1rem;
         }
         
         & .nav-icon{
             width: 100%;
-            fill: $soft-gray;
-            stroke:$soft-gray;
+            fill: $dark-gray;
+            stroke:$dark-gray;
             stroke-width: 1.3rem;
             margin-right: 20px;
         }
@@ -63,4 +66,33 @@ a{
 .main-body{
     background: $soft-blue;
     border-radius: 4px;
+}
+
+.search{
+    width: 100%;
+    padding: 0px 20px;
+    border: 1px solid $soft-pink;
+    border-radius: 4px;
+    height: 45px;
+    font-size: 1rem;
+    color: $dark-gray;
+    &:focus,&:active{
+        outline: red;
+    }
+}
+
+.search-button{
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: $soft-gray;
+    border-radius: 4px;
+    line-height: 100%;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    &:hover{
+        background-color: $soft-gray-hover;
+        transform: scale(1.1);
+    }
 }

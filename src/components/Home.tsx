@@ -7,27 +7,25 @@ export const Home = ()=>{
     const homeContext = useContext(HomeContext);
 
     useEffect(()=>{
-        if(homeContext){
-            homeContext.setUser({
-                bio:{
-                    name:'Anil'
+        homeContext.setUser({
+            bio:{
+                name:'Anil'
+            },
+            experience:[{
+                    company:'Goma IT Solution'
                 },
-                experience:[{
-                        company:'Goma IT Solution'
-                    },
-                    {
-                        company:'ACE Constructors'
-                    }
-                ],
-                skills:[{
-                        skillType:'Front-end'
-                    },
-                    {
-                        skillType:'Backend-end'
-                    }
-                ]
-            })
-        }
+                {
+                    company:'ACE Constructors'
+                }
+            ],
+            skills:[{
+                    skillType:'Front-end'
+                },
+                {
+                    skillType:'Backend-end'
+                }
+            ]
+        })
         
     },[])
 
