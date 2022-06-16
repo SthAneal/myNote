@@ -1,0 +1,66 @@
+$soft-pink:#baabda80;
+$dark-pink:#D77FA1;
+$soft-blue:#D6E5FA;
+$soft-gray:#423737;
+a{
+    text-decoration: none;
+}
+
+.side-menu{
+    transition: all 0.2s ease-in-out;
+    background: $soft-pink;
+ 
+    & .logo{
+        height: 100%;
+        width: 100%;
+    }
+
+    & .nav{
+        padding:5px 10px;
+        transition: all 0.25s linear;
+        //flex="0 0 30px" flexGap="20px" width="100%" justifyContent="start" alignItems="center"
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        flex: 0 0 30px; 
+        width:100%;
+        box-sizing: border-box;
+
+        &:hover{
+            // transform: scale3d(0.9, 0.9, 0.9);
+            transform: translateX(3px);
+            background: $soft-blue;
+            border-radius: 4px;
+
+            & .nav-name{
+                color: $dark-pink;
+            }
+
+            & .nav-icon{
+                fill: $dark-pink;
+                stroke: $dark-pink;
+            }
+        }
+        
+        & .nav-name{
+            color: $soft-gray;
+            font-size: 1.1rem;
+        }
+        
+        & .nav-icon{
+            width: 100%;
+            fill: $soft-gray;
+            stroke:$soft-gray;
+            stroke-width: 1.3rem;
+            margin-right: 20px;
+        }
+
+    }
+
+}
+
+.main-body{
+    background: $soft-blue;
+    border-radius: 4px;
+}

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Axios from '../api/Axios';
+import {FlexDiv} from '../styles/globalStyleComponent';
 
 type productType = {
     product:{}
@@ -24,7 +25,7 @@ export const Woolie = ()=>{
     }
 
     return(
-        <div>Wollie: {JSON.stringify(product.product)}</div>
+        <FlexDiv maxWidth="100%" overflowX="scroll">Wollie: {JSON.stringify(product.product)}</FlexDiv>
         // <>Wollie: {product.product}</>
 
     )

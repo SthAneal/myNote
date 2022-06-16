@@ -1,61 +1,34 @@
-// import React from 'react';
-import React, {useState, useEffect} from 'react';
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import axios from 'axios';
-import './App.css';
-import {Login} from './components/Login';
-import {Register} from './components/Register';
-import {Home} from './components/Home';
-import { Woolie } from './components/Woolie';
-import {Coles} from './components/Coles';
+import { Layout } from './components/Layout';
+import { Home } from './components/Home';
+import { Retail } from './components/Retail';
+import { Error } from './components/Error';
 
-import Axios from './api/Axios';
+import { HomeContextProvider } from './context/HomeContext';
+import { RetailProvider } from './context/RetailContext';
 
-
-type userInfo = {
-  name:string
-}
+// import { Login } from './components/Login';
+// import { Register } from './components/Register';
+// import { Woolie } from './components/Woolie';
+// import { Coles } from './components/Coles';
 
 function App() {
-
-  const [user, setUser] = useState<userInfo>({} as userInfo);
-
-  useEffect(()=>{
-    getName();
-    }, [])
-
-  // const getName = async ()=>{
-  //   // const response = await axios.get('/name');
-  //   // console.log(response);
-  //   // setUser({name:response.data});
-  //   setUser({name:'Anil Shrestha'});
-
-  // }
-
-  const getName = async ()=>{
-    const response = await Axios.get('/api/register');
-    // const response = await Axios.get('/api/login');
-
-    console.log(response);
-    setUser({name:response.data.msg});
-}
-
   return (
-    <>
-      <div>User name: {user.name}</div>
-      {/* <div>{user.name}</div> */}
-      <Router>
-        <Routes>
-          <Route path="/login" caseSensitive={false} element={<Login />} />
+    <Router>
+      <Routes>
+        <Route path="/" caseSensitive={false} element={<Layout/>}>
+          <Route index element={<HomeContextProvider><Home /></HomeContextProvider>} />
+
+          {/* <Route path="/login" caseSensitive={false} element={<Login />} />
           <Route path="/register" caseSensitive={false} element={<Register />} />
           <Route path="/woolie" caseSensitive={false} element={<Woolie />} />
-          <Route path="/coles" caseSensitive={false} element={<Coles />} />
-          <Route path="/" caseSensitive={false} element={<Home />} />
-
-        </Routes>
-      </Router>
-    </>
+          <Route path="/coles" caseSensitive={false} element={<Coles />} /> */}
+          
+          <Route path="/retail" caseSensitive={false} element={<RetailProvider><Retail /></RetailProvider>} />
+          <Route path="*" element={<Error />}/>
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
