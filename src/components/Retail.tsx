@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import { RetailContext } from "../context/RetailContext";
 
 import { FlexDiv } from "../styles/globalStyleComponent";
@@ -21,8 +21,23 @@ export const Retail = ()=>{
             // console.log(searchButtonRef.current.disabled);
             // searchButtonRef.current.disabled = true;
             retailContext.enableSearchBtn(false);
+
+            // console.log(searchInputRef.current);
+            console.log('Retail:searchChangeHandler');
+
         }else{
             retailContext.enableSearchBtn(true);
+            console.log('Retail:searchChangeHandler');
+        }
+    }
+
+    const searchOnEnterKey = (event:React.KeyboardEvent<HTMLInputElement>):void=>{
+        if(searchInputRef.current.value.length > 0 && searchInputRef.current.value.trim() !==''){
+            if(event.key === 'Enter'){
+                retailContext.searchProduct(searchInputRef.current.value);
+                console.log('Retail:searchOnEnterKey');
+
+            }
         }
     }
 
@@ -71,9 +86,9 @@ export const Retail = ()=>{
             </FlexDiv> */}
 
             <FlexDiv flex="1 1 320px" padding="15px" height="100%" flexDirection="column" className="main-body">
-                <FlexDiv flex="0 0 80px" flexGap="10px" width="100%" justifyContent="start" alignItems="center">
-                    <FlexDiv flex="1 1 auto">
-                        <input className="search" type="text" ref={searchInputRef} onChange={searchChangeHandler} placeholder="Search a product"/>
+                <FlexDiv flex="0 0 80px" flexGap="10px" width="100%" justifyContent="center" alignItems="center">
+                    <FlexDiv flex="0 1 910px">
+                        <input className="search" type="text" ref={searchInputRef} onChange={searchChangeHandler} onKeyPress={searchOnEnterKey} placeholder="Search a product"/>
                     </FlexDiv>
                     <FlexDiv flex="0 0 50px">
                         <button className='search-button' ref={searchButtonRef} onClick={searchProduct} disabled={retailContext.state.searchBtnDisabled}><SearchIcon/></button>
@@ -87,9 +102,10 @@ export const Retail = ()=>{
 
             </FlexDiv>
             
-            <FlexDiv flex="0 1 320px" padding="15px" height="100%" flexDirection="column">
+            {/* <FlexDiv flex="0 1 320px" padding="15px" height="100%" flexDirection="column">
                 side section
-            </FlexDiv>
+            </FlexDiv> */}
+            
         </FlexDiv>
     )
 }
