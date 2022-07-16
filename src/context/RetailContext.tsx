@@ -1,6 +1,6 @@
 import React from "react";
 
-type ProductDetailType = {
+export type ProductDetailType = {
     name:string
     price:string
     description:string
@@ -44,11 +44,22 @@ const initialState:RetailContextStateType = {
             name:'salty salt',
             price:'$50',
             description:'Himalayan salt'
-        }],
+        },
+        {
+            name:'Blue salt',
+            price:'$45',
+            description:'Blue Sea salt'
+        }
+    ],
         woolie:[{
             name:'bulky salt',
             price:'$53.5',
             description:'Indian salt'
+        },
+        {
+            name:'Woolies salt',
+            price:'$40',
+            description:'Woolies special salt'
         }]
     },
     searchBtnDisabled:true,

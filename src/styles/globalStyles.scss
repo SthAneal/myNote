@@ -4,6 +4,7 @@ $soft-blue:#D6E5FA;
 $dark-gray:#423737;
 $soft-gray:#edecec;
 $soft-gray-hover:#d5d5d5;
+$good-white:#ffffff;
 
 a{
     text-decoration: none;
@@ -94,5 +95,20 @@ a{
     &:hover{
         background-color: $soft-gray-hover;
         transform: scale(1.1);
+    }
+}
+
+// Styles for Products components
+.product-wrapper{
+    & .product-header{
+        background: #fbfbfb;
+        font-size: 1.5rem;
+    }
+    & .product-body{
+        border: 1px solid #ccc;
+        color: $dark-gray;
+        & > div:not(:last-child){
+            border-bottom: 1px solid $soft-pink;
+        }
     }
 }

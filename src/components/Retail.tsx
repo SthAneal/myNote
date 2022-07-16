@@ -4,6 +4,7 @@ import { RetailContext } from "../context/RetailContext";
 import { FlexDiv } from "../styles/globalStyleComponent";
 import { ReactComponent as SearchIcon } from "../assets/search.svg";
 
+import { Products } from './Products';
 
 
 export const Retail = ()=>{
@@ -46,6 +47,26 @@ export const Retail = ()=>{
         console.log(searchInputRef.current.value);
         retailContext.searchProduct(searchInputRef.current.value);
     }
+
+    // const wooliesProduct = {
+    //     vendor:'Woolies',
+    //     items:[{
+    //         name:'Rice',
+    //         price:'$20',
+    //         description:'Basmati Rice'
+    //     }]
+    // }
+
+    // const colesProduct = {
+    //     vendor:'Coles',
+    //     items:[{
+    //         name:'Rice',
+    //         price:'$30',
+    //         description:'Jasmine Rice'
+    //     }]
+    // }
+    
+
 
 
     return(
@@ -95,8 +116,14 @@ export const Retail = ()=>{
                     </FlexDiv>
                 </FlexDiv>
                                 
-                <FlexDiv>
+                <FlexDiv flex="1 1 auto" flexGap="20px" justifyContent="start" alignItems="start" width="100%">
                     {retailContext.state.searchValue && `You searched for "${retailContext.state.searchValue}"`}
+
+                    <Products product={{vendor:'Woolie',items:retailContext.state.retailer?.woolie}}></Products>
+
+                    <Products product={{vendor:'Coles',items:retailContext.state.retailer?.coles}}></Products>
+                    
+
                 </FlexDiv>
                 
 
