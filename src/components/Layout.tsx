@@ -3,8 +3,11 @@ import { FlexDiv } from '../styles/globalStyleComponent';
 import '../styles/globalStyles.scss';
 
 import { ReactComponent as LogoIcon } from "../assets/logo.svg";
-import { ReactComponent as HomeIcon } from "../assets/home.svg";
-import { ReactComponent as UserIcon } from "../assets/user.svg";
+// import { ReactComponent as HomeIcon } from "../assets/home.svg";
+// import { ReactComponent as UserIcon } from "../assets/user.svg";
+import { MdHome } from 'react-icons/md';
+import { MdPermIdentity } from 'react-icons/md';
+import  { MdOutlineNoteAlt } from 'react-icons/md';
 
 export const Layout = ()=>{
     return(
@@ -12,7 +15,7 @@ export const Layout = ()=>{
             <FlexDiv 
                 flex="1 0 200px" 
                 width="100%" 
-                height="100%" 
+                minHeight="100%" 
                 flexDirection="column" 
                 justifyContent="start" 
                 flexGap="15px"
@@ -32,7 +35,7 @@ export const Layout = ()=>{
                 </FlexDiv>
 
 
-                <Link to="/" className="nav">
+                {/* <Link to="/" className="nav">
                     <FlexDiv flex="0 0 20px" height="20px" alignItems="center" className="nav-icon"><UserIcon/></FlexDiv>
                     <FlexDiv flex="0 0 auto" alignItem="center" className="nav-name">About Me</FlexDiv>
                 </Link>
@@ -41,8 +44,24 @@ export const Layout = ()=>{
                 <Link to="/retail" className="nav">
                     <FlexDiv flex="0 0 20px" height="20px" alignItems="center" className="nav-icon"><HomeIcon/></FlexDiv>
                     <FlexDiv flex="0 0 auto" alignItem="center" className="nav-name">Retail</FlexDiv>
-                </Link>
+                </Link> */}
                 
+                <Link to="/" className="nav">
+                    <FlexDiv flex="0 0 20px" height="20px" alignItems="center" className="nav-icon"><MdPermIdentity/></FlexDiv>
+                    <FlexDiv flex="0 0 auto" alignItem="center" className="nav-name">About Me</FlexDiv>
+                </Link>
+
+
+                <Link to="/retail" className="nav">
+                    <FlexDiv flex="0 0 20px" height="20px" alignItems="center" className="nav-icon"><MdHome/></FlexDiv>
+                    <FlexDiv flex="0 0 auto" alignItem="center" className="nav-name">Retail</FlexDiv>
+                </Link>
+
+                <Link to="/mynote" className="nav">
+                    <FlexDiv flex="0 0 20px" height="20px" alignItems="center" className="nav-icon"><MdOutlineNoteAlt/></FlexDiv>
+                    <FlexDiv flex="0 0 auto" alignItem="center" className="nav-name">My Notes</FlexDiv>
+                </Link>
+
             </FlexDiv>
             <FlexDiv flex="1 1 100%" height="100%" padding="15px">
                 <Outlet/>

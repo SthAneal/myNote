@@ -5,6 +5,8 @@ const FlexDiv = styled.div`
     box-sizing:${props=>props.boxSizing || "border-box"};
     width: ${props=>props.width || ""};
     height: ${props=>props.height || ""};
+    min-height: ${props=>props.minHeight || ""};
+    max-height: ${props=>props.maxHeight || ""};
     max-width: ${props=>props.maxWidth || ""};
     min-width: ${props=>props.minWidth || ""};
     flex: ${props=>props.flex || "1 1 auto"};
@@ -30,6 +32,9 @@ const FlexDiv = styled.div`
     // margin:${props=>(props.flexDirection==='column' && props.flexGap) && css`0 0 -${props.flexGap} 0`};
 
     margin: ${props=>props.margin+'!important' || ""};
+
+    // css gap property integration
+    gap: ${props=>props.gap || ""};
 
 `;
 

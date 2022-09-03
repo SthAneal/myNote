@@ -1,9 +1,12 @@
 import React from "react";
+import Axios from "../api/Axios";
 
 export type ProductDetailType = {
     name:string
     price:string
     description:string
+    isSpecial:boolean
+    image:string
 }
 
 type RetailerType = {
@@ -43,23 +46,31 @@ const initialState:RetailContextStateType = {
         coles:[{
             name:'salty salt',
             price:'$50',
-            description:'Himalayan salt'
+            description:'Himalayan salt',
+            isSpecial:false,
+            image:''
         },
         {
             name:'Blue salt',
             price:'$45',
-            description:'Blue Sea salt'
+            isSpecial:false,
+            description:'Blue Sea salt',
+            image:''
         }
     ],
         woolie:[{
             name:'bulky salt',
             price:'$53.5',
-            description:'Indian salt'
+            isSpecial:false,
+            description:'Indian salt',
+            image:''
         },
         {
             name:'Woolies salt',
             price:'$40',
-            description:'Woolies special salt'
+            isSpecial:false,
+            description:'Woolies special salt',
+            image:''
         }]
     },
     searchBtnDisabled:true,
@@ -83,8 +94,7 @@ const initialState:RetailContextStateType = {
 const reducer = (state:RetailContextStateType, action:ActionType)=>{
     switch(action.type){
         case 'SEARCH':{
-            console.log('calling from SEARCH');
-            return {...state, searchValue:action.payload.searchValue};
+            return {...state,retailer:action.payload.retailer};
         }
         case 'ENABLE_SEARCH':{
             console.log('calling ENABLE_SEARCH');
@@ -104,9 +114,19 @@ export const RetailContext = React.createContext({} as RetailContextType);
 export const RetailProvider = ({children}:RetailProviderProps)=>{
     const [state, dispatch] = React.useReducer(reducer, initialState);
 
-    const searchProduct = (name:string)=>{
-        console.log('product lists');
-        dispatch({type:'SEARCH', payload:{searchValue:name}});
+    const searchProduct = async (name:string)=>{
+        // console.log('product lists');
+        // dispatch({type:'SEARCH', payload:{searchValue:name}});
+
+            try {
+                const wooliesResponse = await Axios.get(`/api/woolie?value=${name}`);
+                const colesResponse = await Axios.get(`/api/coles?value=${name}`)
+
+                console.log('coles response ='+JSON.stringify(colesResponse.data));  
+                dispatch({type:'SEARCH',payload:{retailer:{woolie:wooliesResponse.data.items,coles:colesResponse.data.items}}});
+            } catch (error) {
+                console.log(error);
+            }
     }
 
     const enableSearchBtn = (disableFlag:boolean)=>{

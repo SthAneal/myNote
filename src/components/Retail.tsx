@@ -106,7 +106,7 @@ export const Retail = ()=>{
                 </FlexDiv>
             </FlexDiv> */}
 
-            <FlexDiv flex="1 1 320px" padding="15px" height="100%" flexDirection="column" className="main-body">
+            <FlexDiv flex="1 1 320px" padding="15px" minHeight="100%" flexDirection="column" className="main-body">
                 <FlexDiv flex="0 0 80px" flexGap="10px" width="100%" justifyContent="center" alignItems="center">
                     <FlexDiv flex="0 1 910px">
                         <input className="search" type="text" ref={searchInputRef} onChange={searchChangeHandler} onKeyPress={searchOnEnterKey} placeholder="Search a product"/>

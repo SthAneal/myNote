@@ -5,6 +5,11 @@ $dark-gray:#423737;
 $soft-gray:#edecec;
 $soft-gray-hover:#d5d5d5;
 $good-white:#ffffff;
+$soft-green:#CAF7E3;
+$off-green:#EDFFEC;
+$off-pink:#F6DFEB;
+$in-pink:#E4BAD4;
+$soft-yellow:#ECE5C7;
 
 a{
     text-decoration: none;
@@ -41,9 +46,12 @@ a{
                 color: $dark-pink;
             }
 
+            // & .nav-icon{
+            //     fill: $dark-pink;
+            //     stroke: $dark-pink;
+            // }
             & .nav-icon{
-                fill: $dark-pink;
-                stroke: $dark-pink;
+                color: $dark-pink;
             }
         }
         
@@ -52,12 +60,20 @@ a{
             font-size: 1.1rem;
         }
         
+        // & .nav-icon{
+        //     width: 100%;
+        //     fill: $dark-gray;
+        //     stroke:$dark-gray;
+        //     stroke-width: 1.3rem;
+        //     margin-right: 20px;
+        // }
+
         & .nav-icon{
             width: 100%;
-            fill: $dark-gray;
-            stroke:$dark-gray;
+            color: $dark-gray;
             stroke-width: 1.3rem;
             margin-right: 20px;
+            font-size: 1.4rem;
         }
 
     }
@@ -101,14 +117,18 @@ a{
 // Styles for Products components
 .product-wrapper{
     & .product-header{
-        background: #fbfbfb;
+        background: $soft-pink;
         font-size: 1.5rem;
+        color: $dark-gray;
     }
     & .product-body{
-        border: 1px solid #ccc;
+        // border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow:  0px 0px 4px 0px $soft-pink;
         color: $dark-gray;
+        background: $good-white;
         & > div:not(:last-child){
-            border-bottom: 1px solid $soft-pink;
+            border-bottom: 1px solid $soft-gray;
         }
     }
 }
