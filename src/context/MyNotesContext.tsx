@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react';
+
+// import google realtime database instance
+import { ref, set, onValue, update, remove } from 'firebase/database';
+
 // import google authProvider and other related functions
 import { 
     GoogleAuthProvider,
@@ -8,7 +12,7 @@ import {
     onAuthStateChanged
 } from "firebase/auth";
 
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 
 
 
@@ -43,6 +47,7 @@ type MyNotesContextType = {
     saveNote:(id:number, description:string, bgColor:string)=>void
     googleSignIn:()=>void
     logOut:()=>void
+    deleteNote:(id:number)=>void
 }
 
 type MyNotesProviderProps = {
@@ -50,11 +55,12 @@ type MyNotesProviderProps = {
 }
 
 type ActionType = {
-    type:'ADD_NEW_NOTE' | 'DEL_TEMP_NOTE_TYPE' | 'SHOW_DOTS' | 'SAVE_NOTE' | 'UPDATE_USER'
+    type:'ADD_NEW_NOTE' | 'DEL_TEMP_NOTE_TYPE' | 'SHOW_DOTS' | 'SAVE_NOTE' | 'UPDATE_USER' | 'REFRESH_ALL_NOTE'
     payload:{
         note?:NoteType
         showDots?:ShowDots
         user?:User
+        notes?:NoteType | any
     }
 }
 
@@ -67,24 +73,31 @@ type ActionType = {
 
 const reducer = (state:MyNotesStateType, action:ActionType):MyNotesStateType=>{
     switch(action.type){
-        case 'ADD_NEW_NOTE':{
-            return {...state, notes:[...state.notes!,{...action.payload.note!}], showDots:action.payload.showDots!};
+        case 'REFRESH_ALL_NOTE':{
+            // return {...state, notes:[...state.notes,{...action.payload.note!}]}
+            return {...state, notes:[...action.payload.notes], showDots:action.payload.showDots!};
         }
+        // case 'ADD_NEW_NOTE':{
+        //     // create new note
+        //     set(ref(db, `/${state.user?.uid}/${action.payload.note?.id}`), {...action.payload.note});
+        //     return {...state, showDots:action.payload.showDots!};
+        //     // return {...state, notes:[...state.notes!,{...action.payload.note!}], showDots:action.payload.showDots!};
+        // }
         case 'SHOW_DOTS':{
             return {...state, showDots:action.payload.showDots!};
         }
-        case 'SAVE_NOTE':{
-            const newNote = state.notes.map((note)=>{
-                if (note.id === action.payload.note?.id){
-                    // note.bgColor = action.payload.note.bgColor;
-                    // note.description = action.payload.note.description;
-                    return {...note, description:action.payload.note.description}
-                }else{
-                    return {...note};
-                }
-            })
-            return {...state, notes:newNote, showDots:action.payload.showDots!};
-        }
+        // case 'SAVE_NOTE':{
+        //     const newNote = state.notes.map((note)=>{
+        //         if (note.id === action.payload.note?.id){
+        //             // note.bgColor = action.payload.note.bgColor;
+        //             // note.description = action.payload.note.description;
+        //             return {...note, description:action.payload.note.description}
+        //         }else{
+        //             return {...note};
+        //         }
+        //     })
+        //     return {...state, notes:newNote, showDots:action.payload.showDots!};
+        // }
         case 'UPDATE_USER':{
             return {...state, user:{...action.payload.user}}
         }
@@ -141,11 +154,15 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
      * This is the action function to dispatch 'ADD_NEW_NOTE' event
      * @author Anil
      * @param {bgColor:string} takes background colour as an argument when clicking add note button.
+     * It will be set as the background of new note whose content will be 'new note' and the Id is genereated 
+     * by Date.now()
      */
     const addNewNote = (bgColor:string)=>{
         // console.log('hello from new note');
         const id =  Date.now();
-        dispatch({type:'ADD_NEW_NOTE', payload:{note:{id,description:'new note',bgColor},showDots:false}})
+        // dispatch({type:'ADD_NEW_NOTE', payload:{note:{id,description:'new note',bgColor},showDots:false}});
+        set(ref(db, `/${state.user?.uid}/${id}`), {id,description:'new note',bgColor});
+
     }
 
 
@@ -169,7 +186,24 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
      */
     const saveNote = (id:number, description:string, bgColor:string)=>{
         // console.log(`id:${id};description:${description}`);
-        dispatch({type:'SAVE_NOTE', payload:{note:{id, description, bgColor}, showDots:false}});
+
+        update(ref(db,`/${state.user?.uid}/${id}`), {id, description, bgColor})
+            .then(()=>{
+                console.log('data updated successfully');
+            })
+            .catch((error)=>console.error(error));
+
+        // dispatch({type:'SAVE_NOTE', payload:{note:{id, description, bgColor}, showDots:false}});
+    }
+
+
+    /**
+     * It will delete the corresponding entry based on the supplied id.
+     * @param id -- id of the note to be deleted.
+     * @author Anil
+     */
+    const deleteNote = (id:number)=>{
+        remove(ref(db,`/${state.user?.uid}/${id}`));
     }
 
 
@@ -191,6 +225,24 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
     }
 
 
+    /**
+     * It will dispatch REFRESH_ALL_NOTE action type.
+     * @param notes 
+     * @remark When onAuthStateChanged triggers any changes on real time database it will trigger this action type and re renders the view with updated notes. 
+     * It will set the showDots as false.
+     * @author Anil
+     */
+    const refreshAllNote = (notes: any)=>{
+        dispatch({
+            type:'REFRESH_ALL_NOTE',
+            payload:{
+                notes,
+                showDots:false
+            }
+        })
+    }
+
+
     useEffect(()=>{
         /**
          * To get the state of user login
@@ -199,6 +251,19 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
             updateUser(currentUser?.displayName, currentUser?.email, currentUser?.uid, currentUser?.photoURL)
             // console.log('User', currentUser);
+            if(currentUser){
+                onValue(ref(db, `/${currentUser?.uid}`),(snapshot)=>{
+                    const data = snapshot.val();
+                    // console.log(data);
+                    if(data && data !== null){
+                        const tempNotes = Object.values(data);
+                        // Object.values(data).map((note)=>{
+                        //     return refreshAllNote(note);
+                        // })
+                        refreshAllNote(tempNotes!);
+                    }
+                })
+            }
         });
 
         return ()=>{
@@ -208,7 +273,7 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
 
 
     return(
-        <MyNotesContext.Provider value={{state, addNewNote, showDots, saveNote, googleSignIn, logOut}}>
+        <MyNotesContext.Provider value={{state, addNewNote, showDots, saveNote, googleSignIn, logOut, deleteNote}}>
             {children}
         </MyNotesContext.Provider>
     )

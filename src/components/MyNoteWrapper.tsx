@@ -38,14 +38,15 @@ export const MyNoteWrapper = ()=>{
         <FlexDiv flex="1 1 100%" height="100%" flexDirection="column" justifyContent="center">
             {
                 myNotesContext.state.user?.displayName?
-                <FlexDiv flex="0 0 50px" width="100%" justifyContent="end" gap="15px" alignItems="center">
+                <FlexDiv flex="0 0 50px" width="100%" justifyContent="end" gap="25px" alignItems="center">
                     <FlexDiv flex="0 0 auto" gap="5px" alignItems="center">
-                        <MdFace/>
+                        {/* <MdFace/> */}
+                        {myNotesContext.state.user.photoURL !== null?<img alt="user profile" className="userProfileImage" src={myNotesContext.state.user?.photoURL}/>:<MdFace/>}
                         <span>{myNotesContext.state.user?.displayName}</span>
                     </FlexDiv>
-                    <FlexDiv flex="0 0 auto" gap="5px" className="logoutBtn" alignItems="center" onClick={handleLogOut}>
-                        <span>Logout</span>
+                    <FlexDiv flex="0 0 auto" gap="10px" className="logoutBtn" alignItems="center" onClick={handleLogOut}>
                         <MdLogout/>
+                        <span>Logout</span>
                     </FlexDiv>                        
                 </FlexDiv>:''
             }

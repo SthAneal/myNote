@@ -319,6 +319,7 @@
 
 .noteSection{
     margin-top: 20px;
+    overflow-y: scroll;
     &__item{
         max-width: 30%;
         // margin-bottom: 20px !important;
@@ -343,8 +344,27 @@
 }
 
 .logoutBtn{
+    border: 1px solid $soft-gray;
+    color: $dark-gray;
+    padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
     &:hover{
-        color: $dark-pink;
+        background: $soft-gray-hover;
     }
+}
+
+.userProfileImage{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.noteBtns{
+    @extend .logoutBtn;
+    border: 1px solid $opac-soft-gray;
+    color: $opac-gray;
+    padding: 2px;
+    font-size: 1.5rem;
 }

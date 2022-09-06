@@ -1,5 +1,5 @@
 {
-  "name": "react-express-app-frontend-cicd",
+  "name": "my-portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,7 +11,6 @@
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
-    "axios": "^0.27.2",
     "firebase": "^9.9.4",
     "node-sass": "^7.0.1",
     "react": "^18.1.0",

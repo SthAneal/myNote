@@ -84,11 +84,11 @@ export const MyNote = ()=>{
                 </FlexDiv>
                 <FlexDiv flex="1 1 auto" width="100%" flexDirection="column" justifyContent="start" className="noteList__wrapper">
                     <FlexDiv flex="0 0 auto"><h1>Notes</h1></FlexDiv>
-                    <FlexDiv flex="0 0 auto" flexWrap="wrap" width="100%" gap="20px" alignItems="start" className="noteSection">
+                    <FlexDiv flex="0 0 calc(100vh - 250px)" flexWrap="wrap" width="100%" gap="20px" alignItems="start" className="noteSection">
                        {    
                             // display the notes in reverse order
                             reversedNote.map((note)=>(
-                                <Notes note={note}  className={reversedNote.indexOf(note) === 0?'newNote':''} />
+                                <Notes key={note.id} note={note}  className={reversedNote.indexOf(note) === 0?'newNote':''} />
                             ))
                         }
                     </FlexDiv>
