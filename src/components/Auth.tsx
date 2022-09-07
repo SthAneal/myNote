@@ -22,7 +22,7 @@ export const Auth = ()=>{
 
 
     return(
-        <FlexDiv flex="1 1 auto" flexDirection="column" justifyContent="start" gap="50px" alignItems="center">
+        <FlexDiv flex="1 1 auto" flexDirection="column" justifyContent="flex-start" gap="50px" alignItems="center">
             <FlexDiv flex="0 0 50px" width="100%" justifyContent="center">
                 Welcome to Login Page!!!
             </FlexDiv>

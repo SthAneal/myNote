@@ -6,7 +6,7 @@ import { ref, set, onValue, update, remove } from 'firebase/database';
 // import google authProvider and other related functions
 import { 
     GoogleAuthProvider,
-    signInWithPopup,
+    // signInWithPopup,
     signInWithRedirect,
     signOut,
     onAuthStateChanged

@@ -80,7 +80,7 @@ export const Notes = ({note, className}:NotesPropType)=>{
                     />
                 </FlexDiv>
             </FlexDiv>
-            <FlexDiv flex="0 0 50px" flexDirection="column" justifyContent="start" alignItems="center" gap="15px" padding="5px">
+            <FlexDiv flex="0 0 50px" flexDirection="column" justifyContent="flex-start" alignItems="center" gap="15px" padding="5px">
                 <MdModeEdit className="noteBtns" onClick={()=>toggleNoteTextArea(`noteId${note.id}`)}/>
                 <MdDelete className="noteBtns" onClick={()=>removeNote(note.id!)}/>
                 {/* <MdSave onClick={()=>saveNoteItem(note.id!)}/> */}

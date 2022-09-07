@@ -74,7 +74,7 @@ export const MyNote = ()=>{
                 </FlexDiv>    
             </FlexDiv>
             <FlexDiv flex="1 1 auto" flexDirection="column" height="100%" padding="0 10px 0 50px">
-                <FlexDiv flex="0 0 75px" width="100%" justifyContent="start" alignItems="center" className="noteSearch__wrapper"> 
+                <FlexDiv flex="0 0 75px" width="100%" justifyContent="flex-start" alignItems="center" className="noteSearch__wrapper"> 
                     <form onSubmit={()=>alert('search !!!')}>
                         <FlexDiv flex="0 0 auto" className="noteSearch">
                             <input type="search" placeholder="Search"/>
@@ -82,9 +82,9 @@ export const MyNote = ()=>{
                         </FlexDiv>
                     </form>
                 </FlexDiv>
-                <FlexDiv flex="1 1 auto" width="100%" flexDirection="column" justifyContent="start" className="noteList__wrapper">
+                <FlexDiv flex="1 1 auto" width="100%" flexDirection="column" justifyContent="flex-start" className="noteList__wrapper">
                     <FlexDiv flex="0 0 auto"><h1>Notes</h1></FlexDiv>
-                    <FlexDiv flex="0 0 calc(100vh - 250px)" flexWrap="wrap" width="100%" gap="20px" alignItems="start" className="noteSection">
+                    <FlexDiv flex="0 0 calc(100vh - 250px)" flexWrap="wrap" width="100%" gap="20px" alignItems="flex-start" className="noteSection">
                        {    
                             // display the notes in reverse order
                             reversedNote.map((note)=>(
