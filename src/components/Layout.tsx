@@ -14,7 +14,7 @@ export const Layout = ()=>{
                 width="100%" 
                 minHeight="100%" 
                 flexDirection="column" 
-                justifyContent="start" 
+                justifyContent="flex-start" 
                 flexGap="15px"
                 overflowY="scroll"
                 padding="15px"
