@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect, ReactEventHandler } from 'react';
 import { MyNotesContext } from '../context/MyNotesContext';
 
 import { MdAddCircle, MdOutlineSearch } from 'react-icons/md';
@@ -14,6 +14,7 @@ export const MyNote = ()=>{
     // const showDotsBtn = useRef<HTMLButtonElement>(null!);
     const MyNoteContext = useContext(MyNotesContext);
 
+    const searchInput = useRef<HTMLInputElement>(null);
 
     useEffect(()=>{
         if(MyNoteContext.state.showDots === true)
@@ -56,6 +57,20 @@ export const MyNote = ()=>{
         // showDotsBtn.current.disabled = true;
     }
 
+
+    /**
+     * search note based on description and date
+     * @param searchValue of type string 
+     * @author Anil
+     */
+    const searchNote = (e:React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        const searchValue = searchInput.current?.value;
+        console.log('hello from searchNote', searchValue)
+
+        MyNoteContext.searchNote(searchValue?searchValue:null);
+    }
+
     const reversedNote = [...MyNoteContext.state.notes].reverse();
 
     return(
@@ -75,9 +90,9 @@ export const MyNote = ()=>{
             </FlexDiv>
             <FlexDiv flex="1 1 auto" flexDirection="column" height="100%" padding="0 10px 0 50px">
                 <FlexDiv flex="0 0 75px" width="100%" justifyContent="flex-start" alignItems="center" className="noteSearch__wrapper"> 
-                    <form onSubmit={()=>alert('search !!!')}>
+                    <form onSubmit={(e)=>searchNote(e)}>
                         <FlexDiv flex="0 0 auto" className="noteSearch">
-                            <input type="search" placeholder="Search"/>
+                            <input type="search" placeholder="Search and enter" ref={searchInput}/>
                             <MdOutlineSearch className="noteSearch__icon"/>
                         </FlexDiv>
                     </form>
