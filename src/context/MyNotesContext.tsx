@@ -55,6 +55,7 @@ type MyNotesContextType = {
     googleSignIn:()=>void
     logOut:()=>void
     deleteNote:(id:number)=>void
+    searchNote:(searchValue:string|null)=>void
 }
 
 type MyNotesProviderProps = {
@@ -62,12 +63,12 @@ type MyNotesProviderProps = {
 }
 
 type ActionType = {
-    type:'ADD_NEW_NOTE' | 'DEL_TEMP_NOTE_TYPE' | 'SHOW_DOTS' | 'SAVE_NOTE' | 'UPDATE_USER' | 'REFRESH_ALL_NOTE'
+    type:'ADD_NEW_NOTE' | 'DEL_TEMP_NOTE_TYPE' | 'SHOW_DOTS' | 'SAVE_NOTE' | 'UPDATE_USER' | 'REFRESH_ALL_NOTE' | 'SEARCH_NOTE'
     payload:{
         note?:NoteType
         showDots?:ShowDots
         user?:User
-        notes?:NoteType | any
+        notes?:NoteType[] | any
         created?:string | ''
     }
 }
@@ -108,6 +109,11 @@ const reducer = (state:MyNotesStateType, action:ActionType):MyNotesStateType=>{
         // }
         case 'UPDATE_USER':{
             return {...state, user:{...action.payload.user}}
+        }
+        case 'SEARCH_NOTE':{
+            console.log(action.payload.notes);
+            // return state;
+            return {...state, notes:[...action.payload.notes]}
         }
         default:{
             return state;
@@ -245,6 +251,49 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
 
 
     /**
+     * It will search for the description
+     * @param searchValue
+     * @author Anil
+     * @description if searchValue is valid, it will look for the results else it will return state.notes to payload
+     */
+    const searchNote = (searchValue:string|null)=>{
+        let searchItem = [];
+
+        if(searchValue){
+            searchItem = state.notes.filter((note)=>{
+                if(note.description.toLowerCase().includes(searchValue.toLowerCase())){
+                    return note;
+                }else
+                    return null;
+            });
+
+            // console.log(searchItem);
+
+            dispatch({
+                type:'SEARCH_NOTE',
+                payload:{
+                    notes:searchItem
+                }
+            });
+        }else{
+            onValue(ref(db, `/${state.user?.uid}`),(snapshot)=>{
+                const data = snapshot.val();
+                // console.log(data);
+                if(data && data !== null){
+                    const tempNotes = Object.values(data);
+                    // Object.values(data).map((note)=>{
+                    //     return refreshAllNote(note);
+                    // })
+                    refreshAllNote(tempNotes!);
+                }
+            })
+        }
+
+        
+    }
+
+
+    /**
      * It will dispatch REFRESH_ALL_NOTE action type.
      * @param notes 
      * @remark When onAuthStateChanged triggers any changes on real time database it will trigger this action type and re renders the view with updated notes. 
@@ -293,7 +342,7 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
 
 
     return(
-        <MyNotesContext.Provider value={{state, addNewNote, showDots, updateNote, googleSignIn, logOut, deleteNote}}>
+        <MyNotesContext.Provider value={{state, addNewNote, showDots, updateNote, googleSignIn, logOut, deleteNote, searchNote}}>
             {children}
         </MyNotesContext.Provider>
     )
