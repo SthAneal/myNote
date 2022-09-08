@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect, ReactEventHandler } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { MyNotesContext } from '../context/MyNotesContext';
 
 import { MdAddCircle, MdOutlineSearch } from 'react-icons/md';
