@@ -168,7 +168,9 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
     const addNewNote = (bgColor:string)=>{
         // console.log('hello from new note');
         const id =  Date.now();
-        const dateNow = (new Date(Date.now())).toDateString();
+        // const dateNow = (new Date(Date.now())).toDateString() + ':' +(new Date(Date.now())).getTime();
+        const dateNow = (new Date(Date.now())).toDateString() + ' / ' +(new Date(Date.now())).toLocaleTimeString();
+
         // dispatch({type:'ADD_NEW_NOTE', payload:{note:{id,description:'new note',bgColor},showDots:false}});
         set(ref(db, `/${state.user?.uid}/${id}`), {id,description:'new note',bgColor, isBookmarked:false, created: dateNow});
 

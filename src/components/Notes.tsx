@@ -108,7 +108,7 @@ export const Notes = ({note, className}:NotesPropType)=>{
                     {/* <MdSave onClick={()=>saveNoteItem(note.id!)}/> */}
                 </FlexDiv>
             </FlexDiv>
-            <FlexDiv flex="0 0 30px" width="100%" alignItems="center" padding="2px 10px" className="noteSection__date">
+            <FlexDiv flex="0 0 30px" width="100%" alignItems="center" justifyContent="flex-end" padding="2px 10px" className="noteSection__date">
                 {note.created}
             </FlexDiv>
         </FlexDiv>
