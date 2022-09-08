@@ -14,13 +14,20 @@ import {
 
 import { auth, db } from "../firebase";
 
-
-
 export type NoteType = {
     id:number| null
     description:string|''
     // date:Date
     bgColor: string
+    isBookmarked: boolean
+}
+
+export type NoteTypeOpt = {
+    id:number
+    description?:string|''
+    // date:Date
+    bgColor?: string
+    isBookmarked?: boolean
 }
 
 type ShowDots = boolean | null;
@@ -44,7 +51,7 @@ type MyNotesContextType = {
     state:MyNotesStateType
     addNewNote:(bgColor:string)=>void
     showDots:(showSots:boolean)=>void
-    saveNote:(id:number, description:string, bgColor:string)=>void
+    updateNote:(noteTypeOpt:NoteTypeOpt)=>void
     googleSignIn:()=>void
     logOut:()=>void
     deleteNote:(id:number)=>void
@@ -161,7 +168,7 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
         // console.log('hello from new note');
         const id =  Date.now();
         // dispatch({type:'ADD_NEW_NOTE', payload:{note:{id,description:'new note',bgColor},showDots:false}});
-        set(ref(db, `/${state.user?.uid}/${id}`), {id,description:'new note',bgColor});
+        set(ref(db, `/${state.user?.uid}/${id}`), {id,description:'new note',bgColor, isBookmarked:false});
 
     }
 
@@ -172,22 +179,30 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
      * @param {showDots:boolean} takes boolean flag that controls the visiblity of dots to add new add.
      */
     const showDots = (showDots:boolean)=>{
-        dispatch({type:'SHOW_DOTS', payload:{note:{id:null,description:'',bgColor:''}, showDots:true}});
+        dispatch({type:'SHOW_DOTS', payload:{note:{id:null,description:'',bgColor:'', isBookmarked:false}, showDots:true}});
     }
 
 
     /**
      * It will save the edited note
-     * @param id -- id of last edited note
-     * @param description -- descriptioin of last edited note
-     * @param bgColor -- bgColor of last edited note
+     * @param noteTypeOpt of type NoteTypeOpt which includes note properties - which are all optional except id.
+     * 
+     * @example {
+     *  id:number,
+     *  description?:string | '',
+     *  bgColor?:string,
+     *  isBookmarked?:boolean
+     * }
      * @author Anil 
-     * @remark - saveNote() will update the respective note in real time
+     * @remark - updateNote() will update supplied property value of respective note in real time
      */
-    const saveNote = (id:number, description:string, bgColor:string)=>{
+
+    //  const updateNote = (id:number, description?:string, bgColor?:string, isBookmarked?:boolean)=>{
+
+    const updateNote = (noteTypeOpt:NoteTypeOpt)=>{
         // console.log(`id:${id};description:${description}`);
 
-        update(ref(db,`/${state.user?.uid}/${id}`), {id, description, bgColor})
+        update(ref(db,`/${state.user?.uid}/${noteTypeOpt.id}`), {...noteTypeOpt})
             .then(()=>{
                 console.log('data updated successfully');
             })
@@ -243,6 +258,7 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
     }
 
 
+
     useEffect(()=>{
         /**
          * To get the state of user login
@@ -273,7 +289,7 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
 
 
     return(
-        <MyNotesContext.Provider value={{state, addNewNote, showDots, saveNote, googleSignIn, logOut, deleteNote}}>
+        <MyNotesContext.Provider value={{state, addNewNote, showDots, updateNote, googleSignIn, logOut, deleteNote}}>
             {children}
         </MyNotesContext.Provider>
     )

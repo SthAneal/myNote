@@ -2,7 +2,7 @@ import  React from "react";
 // import { useState } from "react";
 import { NoteType } from "../context/MyNotesContext";
 import { FlexDiv } from "../styles/globalStyleComponent";
-import { MdModeEdit, MdDelete } from "react-icons/md";
+import { MdModeEdit, MdDelete, MdBookmarkAdded, MdBookmark } from "react-icons/md";
 import { MyNotesContext } from '../context/MyNotesContext';
 
 
@@ -12,7 +12,7 @@ type NotesPropType = {
 }
 
 export const Notes = ({note, className}:NotesPropType)=>{
-    const { saveNote, deleteNote} = React.useContext(MyNotesContext);
+    const { updateNote, deleteNote} = React.useContext(MyNotesContext);
 
 
     /**
@@ -33,11 +33,12 @@ export const Notes = ({note, className}:NotesPropType)=>{
     /**
      * 
      * @param e React.MouseEvent<HTMLTextAreaElement>
+     * @param id to update the note based on the provided id
      * @author Anil
      * @description to disable the textArea after mouseOut.
      */
-    const saveNoteItem = (e:React.ChangeEvent<HTMLTextAreaElement>, id:number, bgColor:string)=>{
-        saveNote(id,e.target.value, bgColor);
+    const saveNoteItem = (e:React.ChangeEvent<HTMLTextAreaElement>, id:number)=>{
+        updateNote({id,description:e.target.value});
     }
 
 
@@ -65,6 +66,24 @@ export const Notes = ({note, className}:NotesPropType)=>{
         elem?.setAttribute('disabled','true');
     }
 
+    /**
+     * It will call the updateNote() of myNoteContext.
+     * @param id of type number representing the id of the note being edit.
+     * @param isBookmarked of type boolean representing the bookmark flag of the note being edit.
+     * @author Anil
+     * @description it will alter the isBookmarked true or false based on the supplied value.
+     */
+    const toggleBookmark = (id:number, isBookmarked:boolean)=>{
+        let finalIsBookmarked:boolean;
+
+        if(isBookmarked !== undefined)
+            finalIsBookmarked = !isBookmarked;
+        else
+            finalIsBookmarked = true;
+            
+        updateNote({id, isBookmarked:finalIsBookmarked});
+    }
+
     return(
         <FlexDiv flex="1 0 320px" height="200px" key={note.id} className={`noteSection__item ${className}`} style={{'background':note.bgColor}}>
             <FlexDiv flex="1 1 auto" height="100%">
@@ -75,7 +94,7 @@ export const Notes = ({note, className}:NotesPropType)=>{
                         id={`noteId${note.id}`} 
                         cols={30} rows={10} 
                         className="noteTextArea"  
-                        onChange={(ev: React.ChangeEvent<HTMLTextAreaElement>)=>saveNoteItem(ev, note.id!, note.bgColor)} value={note.description}
+                        onChange={(ev: React.ChangeEvent<HTMLTextAreaElement>)=>saveNoteItem(ev, note.id!)} value={note.description}
                         onMouseOut={(e:React.MouseEvent<HTMLTextAreaElement>)=>disableTextArea(`noteId${note.id}`)}
                     />
                 </FlexDiv>
@@ -83,6 +102,8 @@ export const Notes = ({note, className}:NotesPropType)=>{
             <FlexDiv flex="0 0 50px" flexDirection="column" justifyContent="flex-start" alignItems="center" gap="15px" padding="5px">
                 <MdModeEdit className="noteBtns" onClick={()=>toggleNoteTextArea(`noteId${note.id}`)}/>
                 <MdDelete className="noteBtns" onClick={()=>removeNote(note.id!)}/>
+                {note.isBookmarked?<MdBookmarkAdded className="noteBtns bookmarked" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
+                {!note.isBookmarked?<MdBookmark className="noteBtns" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
                 {/* <MdSave onClick={()=>saveNoteItem(note.id!)}/> */}
             </FlexDiv>
         </FlexDiv>
