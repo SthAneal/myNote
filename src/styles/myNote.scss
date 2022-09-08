@@ -367,4 +367,7 @@
     color: $opac-gray;
     padding: 2px;
     font-size: 1.5rem;
+    &.bookmarked{
+        color: $green-success;
+    }
 }
