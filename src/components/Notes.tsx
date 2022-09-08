@@ -85,26 +85,31 @@ export const Notes = ({note, className}:NotesPropType)=>{
     }
 
     return(
-        <FlexDiv flex="1 0 320px" height="200px" key={note.id} className={`noteSection__item ${className}`} style={{'background':note.bgColor}}>
-            <FlexDiv flex="1 1 auto" height="100%">
-                <FlexDiv flex="1 1 100%" height="100%">
-                    <textarea 
-                        disabled={true} 
-                        name={note.description} 
-                        id={`noteId${note.id}`} 
-                        cols={30} rows={10} 
-                        className="noteTextArea"  
-                        onChange={(ev: React.ChangeEvent<HTMLTextAreaElement>)=>saveNoteItem(ev, note.id!)} value={note.description}
-                        onMouseOut={(e:React.MouseEvent<HTMLTextAreaElement>)=>disableTextArea(`noteId${note.id}`)}
-                    />
+        <FlexDiv flex="1 0 320px" height="200px" flexDirection="column" key={note.id} className={`noteSection__item ${className}`} style={{'background':note.bgColor}}>
+            <FlexDiv flex="1 1 auto" width="100%">
+                <FlexDiv flex="1 1 auto" height="100%">
+                    <FlexDiv flex="1 1 100%" height="100%">
+                        <textarea 
+                            disabled={true} 
+                            name={note.description} 
+                            id={`noteId${note.id}`} 
+                            cols={30} rows={10} 
+                            className="noteTextArea"  
+                            onChange={(ev: React.ChangeEvent<HTMLTextAreaElement>)=>saveNoteItem(ev, note.id!)} value={note.description}
+                            onMouseOut={(e:React.MouseEvent<HTMLTextAreaElement>)=>disableTextArea(`noteId${note.id}`)}
+                        />
+                    </FlexDiv>
+                </FlexDiv>
+                <FlexDiv flex="0 0 50px" flexDirection="column" justifyContent="flex-start" alignItems="center" gap="15px" padding="5px">
+                    <MdModeEdit className="noteBtns" onClick={()=>toggleNoteTextArea(`noteId${note.id}`)}/>
+                    <MdDelete className="noteBtns" onClick={()=>removeNote(note.id!)}/>
+                    {note.isBookmarked?<MdBookmarkAdded className="noteBtns bookmarked" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
+                    {!note.isBookmarked?<MdBookmark className="noteBtns" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
+                    {/* <MdSave onClick={()=>saveNoteItem(note.id!)}/> */}
                 </FlexDiv>
             </FlexDiv>
-            <FlexDiv flex="0 0 50px" flexDirection="column" justifyContent="flex-start" alignItems="center" gap="15px" padding="5px">
-                <MdModeEdit className="noteBtns" onClick={()=>toggleNoteTextArea(`noteId${note.id}`)}/>
-                <MdDelete className="noteBtns" onClick={()=>removeNote(note.id!)}/>
-                {note.isBookmarked?<MdBookmarkAdded className="noteBtns bookmarked" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
-                {!note.isBookmarked?<MdBookmark className="noteBtns" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
-                {/* <MdSave onClick={()=>saveNoteItem(note.id!)}/> */}
+            <FlexDiv flex="0 0 30px" width="100%" alignItems="center" padding="2px 10px" className="noteSection__date">
+                {note.created}
             </FlexDiv>
         </FlexDiv>
     )

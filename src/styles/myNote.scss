@@ -329,6 +329,11 @@
             animation-fill-mode: forwards;
         }
     }
+    &__date{
+        font-size: 0.7rem;
+        color: $dark-gray;
+        direction: rtl;
+    }
 }
 
 .noteTextArea{

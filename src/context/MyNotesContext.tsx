@@ -17,7 +17,7 @@ import { auth, db } from "../firebase";
 export type NoteType = {
     id:number| null
     description:string|''
-    // date:Date
+    created:string| ''
     bgColor: string
     isBookmarked: boolean
 }
@@ -25,7 +25,7 @@ export type NoteType = {
 export type NoteTypeOpt = {
     id:number
     description?:string|''
-    // date:Date
+    created?:string|''
     bgColor?: string
     isBookmarked?: boolean
 }
@@ -68,6 +68,7 @@ type ActionType = {
         showDots?:ShowDots
         user?:User
         notes?:NoteType | any
+        created?:string | ''
     }
 }
 
@@ -167,8 +168,9 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
     const addNewNote = (bgColor:string)=>{
         // console.log('hello from new note');
         const id =  Date.now();
+        const dateNow = (new Date(Date.now())).toDateString();
         // dispatch({type:'ADD_NEW_NOTE', payload:{note:{id,description:'new note',bgColor},showDots:false}});
-        set(ref(db, `/${state.user?.uid}/${id}`), {id,description:'new note',bgColor, isBookmarked:false});
+        set(ref(db, `/${state.user?.uid}/${id}`), {id,description:'new note',bgColor, isBookmarked:false, created: dateNow});
 
     }
 
@@ -179,7 +181,7 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
      * @param {showDots:boolean} takes boolean flag that controls the visiblity of dots to add new add.
      */
     const showDots = (showDots:boolean)=>{
-        dispatch({type:'SHOW_DOTS', payload:{note:{id:null,description:'',bgColor:'', isBookmarked:false}, showDots:true}});
+        dispatch({type:'SHOW_DOTS', payload:{note:{id:null,description:'',bgColor:'', isBookmarked:false, created:''}, showDots:true}});
     }
 
 
