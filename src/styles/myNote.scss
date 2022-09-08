@@ -375,3 +375,23 @@
         color: $green-success;
     }
 }
+
+.welcomeNote{
+    color: $dark-gray;
+}
+
+.login__wrapper{
+    padding:10px 20px;
+    border: 1px solid $soft-gray;
+    border-radius: 4px;
+    background: $soft-blue;
+    &>input{
+        width:100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid $soft-gray;
+    }
+    &>button{
+        @extend .logoutBtn;
+    }
+}
