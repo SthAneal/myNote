@@ -100,11 +100,15 @@ export const Notes = ({note, className}:NotesPropType)=>{
                         />
                     </FlexDiv>
                 </FlexDiv>
-                <FlexDiv flex="0 0 50px" flexDirection="column" justifyContent="flex-start" alignItems="center" gap="15px" padding="5px">
-                    <MdModeEdit className="noteBtns" onClick={()=>toggleNoteTextArea(`noteId${note.id}`)}/>
-                    <MdDelete className="noteBtns" onClick={()=>removeNote(note.id!)}/>
-                    {note.isBookmarked?<MdBookmarkAdded className="noteBtns bookmarked" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
-                    {!note.isBookmarked?<MdBookmark className="noteBtns" onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}/>:''}
+                <FlexDiv flex="0 0 50px" flexDirection="column" justifyContent="flex-start" alignItems="center" gap="15px" padding="5px" className="noteBtns__wrapper">
+                    <div onClick={()=>toggleNoteTextArea(`noteId${note.id}`)}>
+                        <MdModeEdit className="noteBtns"/>
+                    </div>
+                    <div  onClick={()=>removeNote(note.id!)}> 
+                        <MdDelete className="noteBtns"/>
+                    </div>
+                    {note.isBookmarked?<div onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}><MdBookmarkAdded className="noteBtns bookmarked"/></div>:''}
+                    {!note.isBookmarked?<div onClick={()=>toggleBookmark(note.id!, note.isBookmarked)}><MdBookmark className="noteBtns"/></div>:''}
                     {/* <MdSave onClick={()=>saveNoteItem(note.id!)}/> */}
                 </FlexDiv>
             </FlexDiv>
