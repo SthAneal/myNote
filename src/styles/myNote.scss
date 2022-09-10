@@ -10,6 +10,14 @@
     margin-bottom:15px;
 }
 
+.noteSearch__form{
+    &,&>.noteSearch>input{
+        @media screen and (max-width:576px) {
+            width: 100%;
+        }
+    }
+}
+
 .noteSearch{
     position: relative;
     &>input{
@@ -40,6 +48,14 @@
     transition: all 0.5s linear;
     & .noteLogo{
         margin-bottom:20px;
+    }
+    @media screen and (max-width:375px) {
+        flex-basis: 60px !important;
+    }
+    &+div{
+        @media screen and (max-width:576px) {
+         padding: 0 10px;   
+        }
     }
 }
 
@@ -320,9 +336,15 @@
 .noteSection{
     margin-top: 20px;
     overflow-y: scroll;
+    padding: 5px;
     &__item{
-        max-width: 30%;
+        width: 30%;
+        box-shadow:0px 0px 7px -4px #0b0a0a;
+        border-radius: 6px;
         // margin-bottom: 20px !important;
+        @media screen and (max-width:576px) {
+            flex-basis: 100% !important;   
+        }
         &.newNote{
             animation-name: growNote;
             animation-duration: 0.8s;
@@ -352,6 +374,7 @@
     color: $dark-gray;
     padding: 5px 10px;
     border-radius: 4px;
+    background: $good-white;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     &:hover{
@@ -359,11 +382,6 @@
     }
 }
 
-.userProfileImage{
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-}
 
 .noteBtns{
     @extend .logoutBtn;
@@ -378,6 +396,27 @@
 
 .welcomeNote{
     color: $dark-gray;
+}
+
+.note__header{
+    background: $header-gray;
+    padding: 5px 10px;
+}
+
+.note__avatar{
+    &--name{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        @media screen and (max-width:300px) {
+            max-width: 85px;
+        }
+    }
+    &--image{
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+    }
 }
 
 .login__wrapper{

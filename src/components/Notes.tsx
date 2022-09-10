@@ -85,7 +85,7 @@ export const Notes = ({note, className}:NotesPropType)=>{
     }
 
     return(
-        <FlexDiv flex="1 0 320px" height="200px" flexDirection="column" key={note.id} className={`noteSection__item ${className}`} style={{'background':note.bgColor}}>
+        <FlexDiv flex="0 0 320px" height="200px" flexDirection="column" key={note.id} className={`noteSection__item ${className}`} style={{'background':note.bgColor}}>
             <FlexDiv flex="1 1 auto" width="100%">
                 <FlexDiv flex="1 1 auto" height="100%">
                     <FlexDiv flex="1 1 100%" height="100%">
