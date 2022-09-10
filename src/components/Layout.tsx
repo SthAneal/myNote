@@ -41,7 +41,7 @@ export const Layout = ()=>{
                 </Link>
 
             </FlexDiv>
-            <FlexDiv flex="1 1 100%" height="100%" padding="15px">
+            <FlexDiv flex="1 1 100%" height="100%" padding="15px" className="outlet__wrapper">
                 <Outlet/>
             </FlexDiv>
         </FlexDiv>

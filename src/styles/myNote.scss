@@ -4,10 +4,17 @@
     background: $soft-blue;
     height: 100%;
     // position: relative;
+    @media screen and (max-width:576px) {
+        position: relative;
+    }
 }
 
 .noteSearch__wrapper{
     margin-bottom:15px;
+    @media screen and (max-width:576px) {
+        flex-basis: 60px !important;
+        margin-bottom: 5px;
+    }
 }
 
 .noteSearch__form{
@@ -46,17 +53,33 @@
     border-right: 1px solid $soft-pink;
     height: 100%;
     transition: all 0.5s linear;
+
     & .noteLogo{
         margin-bottom:20px;
     }
     @media screen and (max-width:375px) {
         flex-basis: 60px !important;
     }
-    &+div{
-        @media screen and (max-width:576px) {
-         padding: 0 10px;   
+    @media screen and (max-width:576px) {
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        z-index: 1;
+        flex-direction: column-reverse !important;
+        height: 323px !important;
+        border: none !important;
+        & .noteLogo{
+            display: none;
+        }
+        &+div{
+            padding: 0 10px !important;
         }
     }
+    // &+div{
+    //     @media screen and (max-width:576px) {
+    //      padding: 0 10px;   
+    //     }
+    // }
 }
 
 @keyframes pulse {
@@ -73,119 +96,243 @@
     100% {transform: rotate(0deg);}
 }
 
-@keyframes firstDot {
-    0% {
-        transform: translateY(0px) rotate(45deg);
-        border-radius: 1px 10px 10px 10px;
+// define animation for normal view other than mobile
+@media screen and (min-width:577px) {
+    @keyframes firstDot {
+        0% {
+            transform: translateY(0px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+           
+        }
+        // 90% {transform: translateY(53px);}
+        100% {
+            transform: translateY(50px) rotate(45deg);
+            border-radius: 10px;
+        }
     }
-    // 90% {transform: translateY(53px);}
-    100% {
-        transform: translateY(50px) rotate(45deg);
-        border-radius: 10px;
+    
+    @keyframes secondDot {
+        0% {
+            transform: translateY(0px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+        }
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(100px) rotate(45deg);
+            border-radius: 10px;
+        }
+    }
+    
+    @keyframes thirdDot {
+        0% {
+            transform: translateY(0px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(150px) rotate(45deg);
+            border-radius: 10px;
+        }
+    }
+    
+    @keyframes fourthDot {
+        0% {
+            transform: translateY(0px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+        }
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(200px) rotate(45deg);
+            border-radius: 10px;
+        }
+    }
+    
+    @keyframes fifthDot {
+        0% {
+            transform: translateY(0px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(250px) rotate(45deg);
+            border-radius: 10px;
+        }
+    }
+    
+    // for dots to be in reverse direction
+    @keyframes firstDotBack {
+        0% {transform: translateY(50px) rotate(45deg);}
+        // 90% {transform: translateY(53px);}
+        100% {
+            transform: translateY(0px) rotate(45deg); 
+            z-index: -1;
+        }
+    }
+    
+    @keyframes secondDotBack {
+        0% {transform: translateY(100px) rotate(45deg);}
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(0px) rotate(45deg);
+            z-index: -1;
+        }
+    }
+    
+    @keyframes thirdDotBack {
+        0% {transform: translateY(150px) rotate(45deg);}
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(0px) rotate(45deg);
+            z-index: -1;
+        }
+    }
+    
+    @keyframes fourthDotBack {
+        0% {transform: translateY(200px) rotate(45deg);}
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(0px) rotate(45deg);
+            z-index: -1;
+        }
+    }
+    
+    @keyframes fifthDotBack {
+        0% {transform: translateY(250px) rotate(45deg);}
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(0px) rotate(45deg);
+            z-index: -1;
+        }
     }
 }
 
-@keyframes secondDot {
-    0% {
-        transform: translateY(0px) rotate(45deg);
-        border-radius: 1px 10px 10px 10px;
+// define keyframes for mobile view
+@media screen and (max-width:576px) {
+
+    @keyframes firstDot {
+        0% {
+            transform: translateY(0px) rotate(-45deg);
+            border-radius: 10px 10px 10px 1px;
+        }
+        // 90% {transform: translateY(53px);}
+        100% {
+            transform: translateY(-50px) rotate(-45deg);
+            border-radius: 10px;
+        }
     }
-    // 50% {transform: translateY(50px);}
-    // 90% {transform: translateY(103px);}
-    100% {
-        transform: translateY(100px) rotate(45deg);
-        border-radius: 10px;
+
+    @keyframes secondDot {
+        0% {
+            transform: translateY(0px) rotate(-45deg);
+            border-radius: 10px 10px 10px 1px;
+        }
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(-100px) rotate(-45deg);
+            border-radius: 10px;
+        }
+    }
+
+    @keyframes thirdDot {
+        0% {
+            transform: translateY(0px) rotate(-45deg);
+            border-radius: 10px 10px 10px 1px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(-150px) rotate(-45deg);
+            border-radius: 10px;
+        }
+    }
+
+    @keyframes fourthDot {
+        0% {
+            transform: translateY(0px) rotate(-45deg);
+            border-radius: 10px 10px 10px 1px;
+        }
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(-200px) rotate(-45deg);
+            border-radius: 10px;
+        }
+    }
+
+    @keyframes fifthDot {
+        0% {
+            transform: translateY(0px) rotate(-45deg);
+            border-radius: 10px 10px 10px 1px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(-250px) rotate(-45deg);
+            border-radius: 10px;
+        }
+    }
+
+    // for dots to be in reverse direction
+    @keyframes firstDotBack {
+        0% {transform: translateY(-50px) rotate(-45deg);}
+        // 90% {transform: translateY(53px);}
+        100% {
+            transform: translateY(0px) rotate(-45deg); 
+            z-index: -1;
+        }
+    }
+
+    @keyframes secondDotBack {
+        0% {transform: translateY(-100px) rotate(-45deg);}
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(0px) rotate(-45deg);
+            z-index: -1;
+        }
+    }
+
+    @keyframes thirdDotBack {
+        0% {transform: translateY(-150px) rotate(-45deg);}
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(0px) rotate(-45deg);
+            z-index: -1;
+        }
+    }
+
+    @keyframes fourthDotBack {
+        0% {transform: translateY(-200px) rotate(-45deg);}
+        // 50% {transform: translateY(50px);}
+        // 90% {transform: translateY(103px);}
+        100% {
+            transform: translateY(0px) rotate(-45deg);
+            z-index: -1;
+        }
+    }
+
+    @keyframes fifthDotBack {
+        0% {transform: translateY(-250px) rotate(-45deg);}
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(0px) rotate(-45deg);
+            z-index: -1;
+        }
     }
 }
 
-@keyframes thirdDot {
-    0% {
-        transform: translateY(0px) rotate(45deg);
-        border-radius: 1px 10px 10px 10px;
-    }
-    // 30% {transform: translateY(50px);}
-    // 90% {transform: translateY(153px);}
-    100% {
-        transform: translateY(150px) rotate(45deg);
-        border-radius: 10px;
-    }
-}
 
-@keyframes fourthDot {
-    0% {
-        transform: translateY(0px) rotate(45deg);
-        border-radius: 1px 10px 10px 10px;
-    }
-    // 50% {transform: translateY(50px);}
-    // 90% {transform: translateY(103px);}
-    100% {
-        transform: translateY(200px) rotate(45deg);
-        border-radius: 10px;
-    }
-}
-
-@keyframes fifthDot {
-    0% {
-        transform: translateY(0px) rotate(45deg);
-        border-radius: 1px 10px 10px 10px;
-    }
-    // 30% {transform: translateY(50px);}
-    // 90% {transform: translateY(153px);}
-    100% {
-        transform: translateY(250px) rotate(45deg);
-        border-radius: 10px;
-    }
-}
-
-// for dots to be in reverse direction
-@keyframes firstDotBack {
-    0% {transform: translateY(50px) rotate(45deg);}
-    // 90% {transform: translateY(53px);}
-    100% {
-        transform: translateY(0px) rotate(45deg); 
-        z-index: -1;
-    }
-}
-
-@keyframes secondDotBack {
-    0% {transform: translateY(100px) rotate(45deg);}
-    // 50% {transform: translateY(50px);}
-    // 90% {transform: translateY(103px);}
-    100% {
-        transform: translateY(0px) rotate(45deg);
-        z-index: -1;
-    }
-}
-
-@keyframes thirdDotBack {
-    0% {transform: translateY(150px) rotate(45deg);}
-    // 30% {transform: translateY(50px);}
-    // 90% {transform: translateY(153px);}
-    100% {
-        transform: translateY(0px) rotate(45deg);
-        z-index: -1;
-    }
-}
-
-@keyframes fourthDotBack {
-    0% {transform: translateY(200px) rotate(45deg);}
-    // 50% {transform: translateY(50px);}
-    // 90% {transform: translateY(103px);}
-    100% {
-        transform: translateY(0px) rotate(45deg);
-        z-index: -1;
-    }
-}
-
-@keyframes fifthDotBack {
-    0% {transform: translateY(250px) rotate(45deg);}
-    // 30% {transform: translateY(50px);}
-    // 90% {transform: translateY(153px);}
-    100% {
-        transform: translateY(0px) rotate(45deg);
-        z-index: -1;
-    }
-}
 
 .MdAddCircle{
     font-size: 2rem;
@@ -194,10 +341,8 @@
 }
 
 .MdAddCircle__wrapper{
-    // &>button{
-    //     border: none;
-    //     background-color: transparent;
-    // }
+    box-shadow: 0px 0px 10px -2px $dark-gray;
+    border-radius: 100%;
     &:hover{
         animation: spin; 
         animation-duration: 2s;
@@ -224,6 +369,11 @@
         box-shadow:0px 1px 5px -3px #3a3a3af7;
         border-radius: 1px 10px 10px 10px;
         cursor: pointer;
+        @media screen and (max-width: 576px) {
+            bottom: 5px !important;
+            border-radius: 10px 10px 10px 1px;
+        }
+
         &.dot__wrapper-soft-green{
             background: $soft-green;
         }
@@ -306,37 +456,13 @@
     100% {transform: scale(1);}
 }
 
-// @keyframes growNote {
-//     0% {
-//         border-radius: 50%;
-//         transform: translateX(-100%);
-//     }
-//     20% {
-//         border-radius: 40%;
-//         transform: translateX(-40%);
-//     }
-//     40% {
-//         border-radius: 30%;
-//         transform: translateX(-30%);
-//     }
-//     60% {
-//         border-radius: 20%;
-//         transform: translateX(-20%);
-//     }
-//     80% {
-//         border-radius: 10%;
-//         transform: translateX(-10%);
-//     }
-//     100% {
-//         border-radius: 4px;
-//         transform:translateX(0%) ;
-//     }
-// }
-
 .noteSection{
     margin-top: 20px;
     overflow-y: scroll;
     padding: 5px;
+    @media screen and (max-width:576px) {
+        margin-top: 5px;
+    }
     &__item{
         width: 30%;
         box-shadow:0px 0px 7px -4px #0b0a0a;
