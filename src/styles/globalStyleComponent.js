@@ -14,6 +14,7 @@ const FlexDiv = styled.div`
     justify-content: ${props=>props.justifyContent || "flex-start"};
     align-items: ${props=>props.alignItems || "flex-start"};
     align-self: ${props=>props.alignSelf || ""};
+    align-content:${props=>props.alignContent || ""};
     flex-wrap: ${props=>props.flexWrap || ""};
     padding: ${props=>props.padding || ""};
     order: ${props=>props.order || ""};
