@@ -62,8 +62,7 @@ export const MyNote = ()=>{
         MyNoteContext.showDots(true);
         // showDotsBtn.current.disabled = true;
     }
-
-
+    
     /**
      * search note based on description and date
      * @param searchValue of type string 
@@ -87,11 +86,15 @@ export const MyNote = ()=>{
                     <MdAddCircle onClick={setShowDotsState} className="MdAddCircle"/>
                 </FlexDiv>
                 <FlexDiv flex="1 1 auto" width="100%" justifyContent="center" className="dot__wrapper" ref={dotWrapper}>
+                    <span className="dot__wrapper-in-pink" onClick={()=>MyNoteContext.showDots(false)}>
+                        <MdAddCircle className="MdAddCircle"/>
+                    </span>    
                     <span className="dot__wrapper-soft-yellow" onClick={()=>addNewNote('#ECE5C7')}></span>
                     <span className="dot__wrapper-soft-green" onClick={()=>addNewNote('#CAF7E3')}></span>
                     <span className="dot__wrapper-off-green" onClick={()=>addNewNote('#EDFFEC')}></span>
                     <span className="dot__wrapper-off-pink" onClick={()=>addNewNote('#F6DFEB')}></span>    
-                    <span className="dot__wrapper-in-pink" onClick={()=>addNewNote('#E4BAD4')}></span>    
+                    <span className="dot__wrapper-in-pink" onClick={()=>addNewNote('#E4BAD4')}>
+                    </span>
                 </FlexDiv>    
             </FlexDiv>
             <FlexDiv flex="1 1 auto" flexDirection="column" height="100%" padding="0 10px 0 50px">

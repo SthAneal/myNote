@@ -189,7 +189,7 @@ export const MyNotesProvider = ({children}:MyNotesProviderProps)=>{
      * @param {showDots:boolean} takes boolean flag that controls the visiblity of dots to add new add.
      */
     const showDots = (showDots:boolean)=>{
-        dispatch({type:'SHOW_DOTS', payload:{note:{id:null,description:'',bgColor:'', isBookmarked:false, created:''}, showDots:true}});
+        dispatch({type:'SHOW_DOTS', payload:{note:{id:null,description:'',bgColor:'', isBookmarked:false, created:''}, showDots}});
     }
 
 
