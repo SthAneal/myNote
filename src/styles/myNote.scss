@@ -66,7 +66,7 @@
         bottom: 15px;
         z-index: 1;
         flex-direction: column-reverse !important;
-        height: 323px !important;
+        // height: 323px !important;
         border: none !important;
         & .noteLogo{
             display: none;
@@ -162,6 +162,19 @@
             border-radius: 10px;
         }
     }
+
+    @keyframes sixthDot {
+        0% {
+            transform: translateY(0px);
+            border-radius: 10px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(300px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+        }
+    }
     
     // for dots to be in reverse direction
     @keyframes firstDotBack {
@@ -210,6 +223,19 @@
         100% {
             transform: translateY(0px) rotate(45deg);
             z-index: -1;
+        }
+    }
+
+    @keyframes sixthDotBack {
+        0% {
+            transform: translateY(300px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(0px) rotate(45deg);
+            border-radius: 10px;
         }
     }
 }
@@ -281,6 +307,19 @@
         }
     }
 
+    @keyframes sixthDot {
+        0% {
+            transform: translateY(0px) rotate(-45deg);
+            border-radius: 10px 10px 10px 1px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(-300px) rotate(-45deg);
+            border-radius: 10px;
+        }
+    }
+
     // for dots to be in reverse direction
     @keyframes firstDotBack {
         0% {transform: translateY(-50px) rotate(-45deg);}
@@ -330,12 +369,25 @@
             z-index: -1;
         }
     }
+
+    @keyframes sixthDotBack {
+        0% {
+            transform: translateY(-300px) rotate(45deg);
+            border-radius: 1px 10px 10px 10px;
+        }
+        // 30% {transform: translateY(50px);}
+        // 90% {transform: translateY(153px);}
+        100% {
+            transform: translateY(0px) rotate(45deg);
+            border-radius: 10px;
+            z-index: -1;
+        }
+    }
 }
 
 
 
 .MdAddCircle{
-    font-size: 2rem;
     color: $dark-gray;
     cursor: pointer;
 }
@@ -343,6 +395,9 @@
 .MdAddCircle__wrapper{
     box-shadow: 0px 0px 10px -2px $dark-gray;
     border-radius: 100%;
+    & .MdAddCircle{
+        font-size: 2rem;
+    }
     &:hover{
         animation: spin; 
         animation-duration: 2s;
@@ -370,7 +425,7 @@
         bottom: 10px;
     }
     &--show{
-        flex-basis: 287px !important;
+        flex-basis: 340px !important;
     }
     &--hide{
         flex-basis: 0 !important;
@@ -406,58 +461,89 @@
         &.dot{
             display: block;
             z-index: 1;
-            &:nth-of-type(5){
+            transition: box-shadow 0.2s ease-in-out;
+            &:hover{
+                box-shadow: 0px 1px 4px -1px #3a3a3af7;
+            }
+            
+            &:nth-of-type(6){
                 animation-name: firstDot;
                 animation-duration: 0.8s;
                 animation-fill-mode: forwards;
             }
-            &:nth-of-type(4){
+            &:nth-of-type(5){
                 animation-name: secondDot;
                 animation-duration: 1.2s;
                 animation-fill-mode: forwards;
             }
-            &:nth-of-type(3){
+            &:nth-of-type(4){
                 animation-name: thirdDot;
                 animation-duration: 1.5s;
                 animation-fill-mode: forwards;
             }
-            &:nth-of-type(2){
+            &:nth-of-type(3){
                 animation-name: fourthDot;
                 animation-duration: 1.7s;
                 animation-fill-mode: forwards;
             }
-            &:nth-of-type(1){
+            &:nth-of-type(2){
                 animation-name: fifthDot;
                 animation-duration: 2.0s;
                 animation-fill-mode: forwards;
             }
+            &:nth-of-type(1){
+                animation-name: sixthDot;
+                animation-duration: 2.2s;
+                animation-fill-mode: forwards;
+                width: 30px;
+                height: 30px;
+                font-size: 1.5rem;
+                text-align: center;
+                @media screen and (max-width:576px) {
+                    border-radius: 20px 20px 20px 1px !important;
+                    width: 25px;
+                    height: 25px;
+                    font-size: 1.3rem;
+                }
+            }
 
             // to reverse call the dots
             &.dotHide{
-                &:nth-of-type(5){
+                &:nth-of-type(6){
                     animation-name: firstDotBack;
                     animation-duration: 0.8s;
                     animation-fill-mode: forwards;
                 }
-                &:nth-of-type(4){
+                &:nth-of-type(5){
                     animation-name: secondDotBack;
                     animation-duration: 1.2s;
                     animation-fill-mode: forwards;
                 }
-                &:nth-of-type(3){
+                &:nth-of-type(4){
                     animation-name: thirdDotBack;
                     animation-duration: 1.7s;
                     animation-fill-mode: forwards;
                 }
-                &:nth-of-type(2){
+                &:nth-of-type(3){
                     animation-name: fourthDotBack;
                     animation-duration: 1.9s;
                     animation-fill-mode: forwards;
                 }
-                &:nth-of-type(1){
+                &:nth-of-type(2){
                     animation-name: fifthDotBack;
                     animation-duration: 2.2s;
                     animation-fill-mode: forwards;
+                }
+                &:nth-of-type(1){
+                    animation-name: sixthDotBack;
+                    animation-duration: 2.4s;
+                    animation-fill-mode: forwards;
+                    width: 20px;
+                    height: 20px;
+                    text-align: center;
+                    line-height: 25px;
+                    overflow: hidden;
+                    font-size: 1rem;
                 }
             }
         }
