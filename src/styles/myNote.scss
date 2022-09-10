@@ -361,6 +361,20 @@
 
 .dot__wrapper{
     position: relative;
+    @media screen and (max-width:576px) {
+        flex: 0 1 !important;
+        background-color: #423737de;
+        transition: flex-basis 1.0s linear;
+        overflow: hidden;
+        border-radius: 20px;
+        bottom: 10px;
+    }
+    &--show{
+        flex-basis: 287px !important;
+    }
+    &--hide{
+        flex-basis: 0 !important;
+    }
     &>span{
         display: none;
         width: 20px;

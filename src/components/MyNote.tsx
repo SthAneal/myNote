@@ -31,6 +31,9 @@ export const MyNote = ()=>{
 
     const displayDots = ()=>{
         const children = dotWrapper.current.children;
+        dotWrapper.current.classList.remove('dot__wrapper--hide');
+        dotWrapper.current.classList.add('dot__wrapper--show');
+
         for(let i =0; i<children.length;i++){
             children[i].classList.add('dot');
         }
@@ -39,6 +42,9 @@ export const MyNote = ()=>{
     const hideDots = ()=>{
         // showDotsBtn.current.disabled = true;
         const children = dotWrapper.current.children;
+        dotWrapper.current.classList.remove('dot__wrapper--show');
+        dotWrapper.current.classList.add('dot__wrapper--hide');
+
         for(let i =0; i<children.length;i++){
             children[i].classList.add('dotHide');
         }
